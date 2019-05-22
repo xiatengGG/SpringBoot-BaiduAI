@@ -1,0 +1,37 @@
+spring:
+# 配置thymeleaf模板引擎
+  thymeleaf:
+    # 模板的字符集
+    encoding: UTF-8
+    # 使用的是什么类型模板
+    mode: HTML5
+    # 是否使用缓存，开发阶段最填false，方便使用ctrl+shift+F9 进行重新编译，无需重启服务
+    cache: false
+    #启动 MVC 对 thymeleaf 视图解析
+    enabled: true
+    # 在构建URL时附加到视图名称的后缀。就是我们用rest风格，不同加文件后缀名。自己加上去
+    suffix: .html
+    # 在构建URL时可以预览查看名称的前缀。就是路径在哪
+    prefix: classpath:/templates/
+    # 检查该模板是否存在
+    check-template-location: true
+    # 模板中内容的类型
+    servlet:
+      content-type: text/html
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/mysql?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+    # 可省略驱动配置, sprin-boot 会由url检测出驱动类型
+    # driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-timeout: 60000
+mybatis:
+#mapper扫描地址
+  mapperLocations: classpath:/com/xiateng/mapper/*.xml
+  typeAliasesPackage: com.xiateng.entity
+# spring-boot默认打印输出info级别以上的，可在此处修改输出级别
+logging:
+  level:
+    root: info

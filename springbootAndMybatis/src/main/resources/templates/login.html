@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link href="/res/css/signin.css" rel="stylesheet">
+    <script src="/res/js/sso.login.js"></script>
+    <!--<script src="/js/script/jquery-1.11.3.js"></script>-->
+</head>
+<body>
+    <div class="signin">
+        <script src="http://libs.baidu.com/jquery/1.11.3/jquery.js"></script>
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <div class="signin-head">
+            <h1>登录页面</h1>
+        </div>
+        <form id="loginForm" action="#" method="post" class="form-signin">
+            <!--<input type="hidden" id="backUrl" name="backUrl" value="http://opsline.chexiang.com/project/index.htm?can_see_admin_menu=false">-->
+            <input type="text" id="userName" name="userName" class="form-control" placeholder="用户名" autocomplete="off">
+            <input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="密码" autocomplete="off">
+            <div id="errorMess"></div>
+            <div class="input-group-btn">
+                <button class="btn btn-primary btn-lg " type="button" onclick="login()">登录</button>
+            </div>
+            <label class="checkbox">
+                <input type="checkbox" id="autoLogin" name="autoLogin" value="true"> 记住我
+            </label>
+        </form>
+    </div>
+    <script>
+        $(document).keyup(function(event){
+            if(event.keyCode ==13){
+                login('', $('#loginForm'));
+            }
+        });
+
+        function login() {
+            $.ajax({
+                type:"POST",
+                url:"/user/login",
+                data:$("#loginForm").serialize(),
+                dataType:'text',
+                success:function (data) {
+                    var str = eval('('+ data +')');
+                    // 失败
+                    if (str.result == 1){
+                        $("#errorMess").text(str.msg);
+                    // 成功
+                    }else if (str.result == 2){
+                        $("#errorMess").text("");
+                        alert(str.msg);
+                        window.location.href="/user/detail?userId="+str.userId;
+//                        window.location.href="/user/detail?userId="+str.userId;
+                    }
+                }
+            })
+
+        }
+        
+        
+    </script>
+</body>
+</html>

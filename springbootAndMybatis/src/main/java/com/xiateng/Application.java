@@ -19,12 +19,12 @@ public class Application extends WebMvcConfigurerAdapter{
         SpringApplication.run(Application.class,args);
     }
 
-    /**
-     * 拦截器，过滤掉static相关文件
-     * @param registry
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new SessionInterceptor()).excludePathPatterns(Arrays.asList("/res/**"));
-    }
+//    /**
+//     * 拦截器，过滤掉static相关文件
+//     * @param registry
+//     */
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new SessionInterceptor()).excludePathPatterns(Arrays.asList("/res/**"));
+//    }
 }
